@@ -41,18 +41,18 @@ class StopwatchApp:
         self.set_timer_button = tk.Button(root, text="Set Timer", command=self.set_timer)
         self.set_timer_button.pack()
 
-        # Add the extended window style to make the window stay on top
+        # Adding the extended window style to make the window stay on top
         self.root.attributes("-topmost", True)
         hwnd = self.root.winfo_id()
         win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOPMOST)
 
-        # Handle deactivation manually
+        # Handling deactivation manually
         self.root.protocol("WM_WINDOWPOSCHANGING", self.on_window_pos_changing)
 
         self.root.after(100, self.update_timer_label)
 
     def on_window_pos_changing(self):
-        # Handle the window deactivation manually
+        # Handling the window deactivation manually
         hwnd = self.root.winfo_id()
         self.root.attributes("-topmost", True)
         win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0,
